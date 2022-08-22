@@ -1,16 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AllLocation from "./AllLocation";
-import { getFinedustalaram } from "../../modules/finedustalarm.js";
+import { getPosts } from "../../modules/posts";
 
 function AllLocationContainer() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.posts);
+  const { loading, data, error } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(getFinedustalaram());
-  }, [dispatch]);
+    !data && dispatch(getPosts());
+  }, [data, dispatch]);
 
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>에러 발생</div>;
+  if (!data) return null;
   return <AllLocation posts={data} />;
 }
 

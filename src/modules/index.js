@@ -6,10 +6,10 @@ import {
 import { combineReducers } from "redux";
 import ReduxThunk from "redux-thunk";
 import logger from "redux-logger";
-import { getFinedustalaram } from "./finedustalarm";
+import posts from "./posts";
 
 const rootReducer = combineReducers({
-  getFinedustalaram,
+  posts,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
