@@ -1,3 +1,3 @@
-import AllLocation from "./AllLocation";
+import AllLocationContainer from "./AllLocationContainer";
 
-export default AllLocation;
+export default AllLocationContainer;
