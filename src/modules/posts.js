@@ -6,9 +6,9 @@ const GET_POSTS_ERROR = "posts/GET_POSTS_ERROR";
 
 const queryParams = {
   serviceKey: process.env.REACT_APP_SERVICE_KEY,
-  returnType: "xml",
-  numOfRows: 100,
-  pageNo: 1,
+  returnType: "json",
+  numOfRows: "100",
+  pageNo: "1",
   sidoName: "서울",
   ver: "1.0",
 };
@@ -16,13 +16,16 @@ const queryParams = {
 export const getPosts = () => async (dispatch, getState) => {
   dispatch({ type: GET_POSTS }); // 요청이 시작됨
   try {
-    const response = await axios.get(
+    const res = await axios.get(
       "B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty",
       {
         params: queryParams,
       }
     ); // API 호출
-    dispatch({ type: GET_POSTS_SUCCESS, payload: { posts: response.data } }); // 성공
+    dispatch({
+      type: GET_POSTS_SUCCESS,
+      payload: { posts: res.data.response.body },
+    }); // 성공
   } catch (e) {
     dispatch({ type: GET_POSTS_ERROR, error: e }); // 실패
   }
